@@ -1,0 +1,17 @@
+
+```{r}
+library(geepack)
+library(tidyverse)
+df <- read.csv('retail_price.csv')
+df <- df %>%
+  mutate(id = as.numeric(factor(product_id))) %>%
+  mutate(id = as.factor(id)) %>%
+  arrange(id)
+```
+
+```{r}
+model <- geeglm(qty ~ unit_price, id = id, data = df)
+summary(model)
+```
+
+
